@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="391.375" height="292.184" viewBox="0 0 391.375 292.184">
+    <defs>
+        <linearGradient id="afmqkzkexa" x1=".036" x2=".994" y1=".5" y2=".5" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#38ef7d"/>
+            <stop offset=".059" stop-color="#32e27a"/>
+            <stop offset=".249" stop-color="#24bd74"/>
+            <stop offset=".403" stop-color="#1ba670"/>
+            <stop offset=".5" stop-color="#189e6f"/>
+            <stop offset=".592" stop-color="#169770"/>
+            <stop offset=".722" stop-color="#108475"/>
+            <stop offset=".874" stop-color="#08667d"/>
+            <stop offset=".998" stop-color="#004985"/>
+        </linearGradient>
+    </defs>
+    <path fill="url(#afmqkzkexa)" d="M588.017 405.6a64.515 64.515 0 0 1-15.959 34.427c-10.848 12.391-26.35 19.969-42.314 24.014-36.858 9.341-75.719 2.935-112.712 11.564-31.91 7.442-62.989 14.94-93.952 25.8-20.745 7.276-42.318 13.778-64.279 12.763a80 80 0 0 1-31.958-8.152c-34.868-17.541-33.346-51.814-23.5-84.564a574.021 574.021 0 0 0 21.732-109.292c2.485-23.951 8.4-49.144 25.676-65.919 24.245-23.541 64.613-26.053 96.492-23.216 65.983 5.873 130.763 22.466 181.573 67.362C558.29 316.43 593.717 363.3 588.017 405.6z" transform="translate(-197.252 -222.085)"/>
+</svg>
