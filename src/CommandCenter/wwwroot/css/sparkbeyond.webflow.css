@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 #landingPageComponents h4 {
   padding-bottom: 10px;
 }
