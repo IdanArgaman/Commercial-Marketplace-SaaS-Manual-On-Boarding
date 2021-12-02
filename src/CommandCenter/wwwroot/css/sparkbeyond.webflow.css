@@ -6,6 +6,12 @@ body {
   padding-bottom: 10px;
 }
 
+#Home form .submit-btn {
+  color: white !important;
+}
+
+landing-page-submit-btn
+
 .w-layout-grid {
   display: -ms-grid;
   display: grid;
@@ -1482,7 +1488,7 @@ blockquote {
 }
 
 .section.hero {
-  height: 100vh;
+  height: 96vh;
   overflow: hidden;
   min-height: 650px;
   padding-top: 0px;

@@ -392,8 +392,7 @@ else
                                 <div id="landingPageComponents">
                                     <div>
                                         <h4>
-                                            You can collect additional information as the first step of the onboarding
-                                            process
+                                            Please share the following details to serve you better
                                         </h4>
                                         <div>
                                             <div>
@@ -404,9 +403,13 @@ else
                                                             model.Region):</label>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            @Html.DropDownListFor(m => m.Region, new
-                                                        SelectList(Enum.GetValues(typeof(TargetContosoRegionEnum))),
-                                                        "Select region", new { @class="dropdown" })
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    @Html.DropDownListFor(m => m.Region, new
+                                                                        SelectList(Enum.GetValues(typeof(TargetContosoRegionEnum))),
+                                                                        "Select region", new { @class="form-control" })
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <br />
@@ -434,7 +437,7 @@ else
                                     </div>
                                     <div>
                                     <div>
-                                        <h4>Example items from the marketplace API result</h4>                                       
+                                        <h4>Details from Azire Marketplace</h4>                                       
                                         </div>
                                         <div>
                                             <div>
@@ -541,7 +544,7 @@ else
                         provisioning or configuration later in the life of the subscription*@
                     <input asp-for="SubscriptionStatus" type="hidden" class="form-control" />
 
-                    <button type="submit" class="btn btn-primary btn-block m-3">Submit</button>
+                    <button type="submit" class="btn btn-primary btn-block m-2 mt-3 submit-btn">Submit</button>
                 </form>
             </div>
         </div>
