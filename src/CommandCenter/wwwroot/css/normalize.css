@@ -206,7 +206,7 @@ input,
 optgroup,
 select,
 textarea {
-  color: black !important;
+  color: inherit;
   /* 1 */
   font: inherit;
   /* 2 */
