@@ -4,6 +4,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    ViewData["HideContainer"] = true;
 }
 
 @if (Model == default)
@@ -12,9 +13,6 @@
 }
 else
 {
-
-    <span class="text-danger">@Html.ValidationSummary(false)</span>
-
     <link href="css/normalize.css" rel="stylesheet" type="text/css">
     <link href="css/webflow.css" rel="stylesheet" type="text/css">
     <link href="css/sparkbeyond.webflow.css" rel="stylesheet" type="text/css">
@@ -39,13 +37,13 @@ else
         }
 
         header {
-            display:none !important;
+            display: none !important;
         }
 
         /* Disables Orchestrator Link - not necessary currently*/
         /*.dropdown-item.dropdown-product:last-child {
-              pointer-events: none;
-          } */
+                  pointer-events: none;
+              } */
         /* Wrapping long words in CMS card titles */
         .cms-card-heading {
             overflow-wrap: break-word;
@@ -55,8 +53,8 @@ else
 
     <div class="page-wrapper">
         <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease"
-        role="banner" class="navbar w-nav">
-            <div class="sb-nav-container">
+        role="banner" class="navbar w-nav" style="padding-top: 0; padding-bottom: 0">
+            <div class="nav-container">
                 <a href="index.html" aria-current="page" class="brand-logo w-nav-brand w--current"><img
                     src="/assets/images/Spark-Beyond-Logo.svg" loading="lazy" alt="Spark Beyond Logo" class="logo"></a>
                 <nav role="navigation" class="nav-menu w-nav-menu">
@@ -94,8 +92,7 @@ else
                             <div class="dropdown-toggle indusrtires w-dropdown-toggle">
                                 <div class="allcaps mobilenav">Industries</div>
                                 <div class="underline"></div>
-                                <div class="dropdown-toggle-circle"><img src="/assets/images/Menu-Arrow.svg" loading="lazy"
-                                    alt="Arrow in circle pointing down" class="dropdown-arrow"></div>
+                                
                             </div>
                             <nav class="dropdown-list industries w-dropdown-list">
                                 <div class="dropdown-list-wrapper industries">
@@ -368,234 +365,324 @@ else
                 </div>
             </div>
         </div>
-        <div class="section-title mobile-hidden">
-            <a href="#" class="nav-anchor w-inline-block">
-                <div class="anchor-text-container">AZURE INTEGRATION TO SPARKBEYOND</div>
-            </a>
-        </div>
-        <div class="home-inner-wrapper">
-            <div data-w-id="524b097b-9964-9f93-4703-c661a7df1dd9" class="home-bg-wrapper">
-                <div class="section-background in-home-hero">
-                    <div class="home-blob-1"><img src="/assets/images/Path-44.svg" loading="lazy" alt=""
-                        class="image blob-contain"></div>
-                    <div class="home-blob-2"><img src="/assets/images/Path-46.svg" loading="lazy" alt=""
-                        class="image blob-contain"></div>
-                    <div class="home-blob-3"><img src="/assets/images/Path-45.svg" loading="lazy" alt=""
-                        class="image blob-contain"></div>
+        <div class="section-title dark mobile-hidden">
+            <div class="section-labels-wrapper">
+                <div class="section-label">Azure Integration to Sparkbeyond</div>
+                <div class="nav-anchor menu-anchor no-borders">
+                <div>menu</div>
                 </div>
             </div>
-            <div id="Home" class="section hero wf-section">
-                <form asp-controller="LandingPage" asp-action="Index">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div id="landingPageComponents">
-                                    <div>
-                                        <h4>
-                                            Please share the following details to serve you better
-                                        </h4>
-                                        <div>
-                                            <div>
-                                                <div class="panel panel-default">
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <label class="form-label">@Html.DisplayNameFor(model =>
-                                                            model.Region):</label>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    @Html.DropDownListFor(m => m.Region, new
-                                                                        SelectList(Enum.GetValues(typeof(TargetContosoRegionEnum))),
-                                                                        "Select region", new { @class="form-control" })
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <br />
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <label class="form-label">@Html.DisplayNameFor(model =>
-                                                            model.BusinessUnitContactEmail):</label>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <input asp-for="BusinessUnitContactEmail" type="email"
-                                                                    class="form-control" />
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <p>*The purchaser (who sees this page) can be different
-                                                                        than the actual user of the solution.</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <label class="form-label">Contact Email:</label>
-                                                        </div>
-                                                         <div class="col-6">
-                                                             <div class="row">
-                                                                <div class="col-sm-6">                                                          
-                                                                    <input asp-for="PurchaserEmail" type="email" class="form-control" />
-                                                                </div>
-                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+        </div>
+        <div class="home-inner-wrapper">
+            <div id="Home" class="" style="color:white;padding: 40px 24px 24px; padding-top: 180px">
+                <form asp-controller="LandingPage" asp-action="Index" >
+                      <div data-w-id="f3f772da-3f75-f2ad-daae-3a16ffa032a9" class="section-background contact-bg">
+                        <div class="home-blob-1"><img src="/assets/images/Path-46.svg" loading="lazy" alt="" class="image blob-contain"></div>
+                        <div class="home-blob-2"><img src="/assets/images/Path-45.svg" loading="lazy" alt="" class="image blob-contain"></div>
+                        <div class="home-blob-3"><img src="/assets/images/Path-45.svg" loading="lazy" alt="" class="image blob-contain"></div>
+                    </div>
+                    <div class="container grid">
+                        <div id="w-node-f3f772da-3f75-f2ad-daae-3a16ffa03283-430663c1" class="form w-form form-grid one-col">
+                           
+                                <h3 id="w-node-f3f772da-3f75-f2ad-daae-3a16ffa03285-430663c1"
+                                class="margin-l azure-form-title">Please provide the following details</h3>
+                                <div class="azure-form-max-width">
+                                    <div class="azure-form-inner bottom-margin">
+                                        @Html.DropDownListFor(m => m.Region, new
+                                            SelectList(Enum.GetValues(typeof(TargetContosoRegionEnum))),
+                                            "Select region", new { @class="form-dropdown white w-select" })
+                                        @* <select id="Azure_Region"
+                                            name="Azure_Region" data-name="Azure_Region"
+                                            class="form-dropdown white w-select">
+                                                <option value="None" disabled="disabled">Region</option>
+                                                <option value="NorthAmerica">NorthAmerica</option>
+                                                <option value="WestEurope">WestEurope</option>
+                                                <option value="EastEurope">EastEurope</option>
+                                                <option value="Germany">Germany</option>
+                                                <option value="APAC">APAC</option>
+                                        </select> *@
+                                    </div>
+                                    <div class="azure-form-inner bottom-margin">
+                                        <input asp-for="BusinessUnitContactEmail" type="email"
+                                            placeholder="Business Unit Contact Email*"
+                                            class="input-field white w-input" />
+                                        <div class="azure-form-subtext">*The purchaser can be different than the end user
                                         </div>
                                     </div>
-                                    <div>
-                                    <div>
-                                        <h4>Details from Azure Marketplace</h4>                                       
-                                        </div>
-                                        <div>
-                                            <div>
-                                                <div class="panel panel-default">
-
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <label class="form-label">@Html.DisplayNameFor(model =>
-                                                            model.OfferId):</label>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label class="form-label">@Html.DisplayFor(model =>
-                                                            model.OfferId) </label>
-                                                            <input asp-for="OfferId" type="hidden" class="form-control" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <label class="form-label">@Html.DisplayNameFor(model =>
-                                                            model.PlanId):</label>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label class="form-label">@Html.DisplayFor(model =>
-                                                            model.PlanId) </label>
-                                                            <input asp-for="PlanId" type="hidden" class="form-control" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <label class="form-label">@Html.DisplayNameFor(model =>
-                                                            model.PurchaserTenantId):</label>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label class="form-label">@Html.DisplayFor(model =>
-                                                            model.PurchaserTenantId) </label>
-                                                            <input asp-for="PurchaserTenantId" type="hidden"
-                                                            class="form-control" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <label class="form-label">@Html.DisplayNameFor(model =>
-                                                            model.BeneficiaryTenantId):</label>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label class="form-label">@Html.DisplayFor(model =>
-                                                            model.BeneficiaryTenantId) </label>
-                                                            <input asp-for="BeneficiaryTenantId" type="hidden"
-                                                            class="form-control" />
-                                                        </div>
-                                                    </div>
-
-                                                    @if (Model.SubscriptionStatus == SubscriptionStatusEnum.Subscribed)
-                                                    {
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                @Html.DisplayNameFor(model => model.AvailablePlans)
-                                                            </div>
-
-                                                            <div class="col-sm-6">
-                                                                @Html.DropDownListFor(m => m.Region, new
-                                                        SelectList(Model.AvailablePlans, "PlanId", "DisplayName"),
-                                                        "Choose a new plan")
-                                                            </div>
-                                                        </div>
-                                                    }
-
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <label class="form-label">@Html.DisplayNameFor(model =>
-                                                            model.SubscriptionId):</label>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label class="form-label">@Html.DisplayFor(model =>
-                                                            model.SubscriptionId) </label>
-                                                            <input asp-for="SubscriptionId" type="hidden"
-                                                            class="form-control" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            @Html.DisplayNameFor(model => model.SubscriptionName)
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            @Html.DisplayFor(model => model.SubscriptionName)
-                                                            <input asp-for="SubscriptionName" type="hidden"
-                                                            class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="azure-form-inner bottom-margin">
+                                        <input asp-for="PurchaserEmail" type="email"
+                                            placeholder="Contact Email"
+                                            class="input-field white w-input" />
                                     </div>
                                 </div>
+                                <h3 id="w-node-_38139189-3e6f-5793-adef-c8d97205c610-430663c1"
+                                class="margin-l azure-form-title">Information from Azure Marketplace</h3>
+                                <div class="azure-form-grid">
+                                    <div class="azure-form-grid-text bold">Offer ID:</div>
+                                    <div class="azure-form-grid-text">
+                                        @Html.DisplayFor(model => model.OfferId)
+                                        <input asp-for="OfferId" type="hidden" class="form-control" />
+                                    </div>
+                                    <div class="azure-form-grid-text bold">Current Plan:</div>
+                                    <div class="azure-form-grid-text">
+                                        @Html.DisplayFor(model => model.PlanId)
+                                        <input asp-for="PlanId" type="hidden" class="form-control" />
+                                    </div>
+                                    <div class="azure-form-grid-text bold">Purchaser AAD TenantID:</div>
+                                    <div class="azure-form-grid-text">
+                                        @Html.DisplayFor(model => model.PurchaserTenantId)
+                                        <input asp-for="PurchaserTenantId" type="hidden" class="form-control" />
+                                    </div>
+                                    <div class="azure-form-grid-text bold">Beneficiary AAD TenanatID:</div>
+                                    <div class="azure-form-grid-text">
+                                        @Html.DisplayFor(model => model.BeneficiaryTenantId) 
+                                        <input asp-for="BeneficiaryTenantId" type="hidden" class="form-control" />
+                                    </div>
+                                    <div class="azure-form-grid-text bold">SaaS Subscription ID:<br></div>
+                                    <div class="azure-form-grid-text">
+                                        @Html.DisplayFor(model => model.SubscriptionId)
+                                        <input asp-for="SubscriptionId" type="hidden" class="form-control" />
+                                    </div>
+                                    <div class="azure-form-grid-text bold">Subscription Name:</div>
+                                    <div class="azure-form-grid-text">
+                                        @Html.DisplayFor(model => model.SubscriptionName)
+                                        <input asp-for="SubscriptionName" type="hidden"
+                                        class="form-control" />
+                                    </div>
+                                </div>
+                                <div id="w-node-f3f772da-3f75-f2ad-daae-3a16ffa03295-430663c1"
+                                class="checkbox-wrapper azure-form">
+                                    <div class="text-block-6">By submitting this form, I agree to SparkBeyond's <a
+                                        href="privacy-policy.html" target="_blank" class="link">privacy policy</a>
+                                    </div>
+                                </div>
+                                <div class="hub-flex azure-form">
+                                    <input type="submit" value="Submit" data-wait="Please wait..."
+                                        id="w-node-f3f772da-3f75-f2ad-daae-3a16ffa032a1-430663c1"
+                                        class="submit-button azure-form w-button">
+                                </div>
+                                <div class="w-embed"><input type="hidden" id="current-page" data-name="Current Page"
+                                    value="file:///C:/Users/TomyEL/Desktop/sparkbeyond.webflow/html-extract-azure-integration.html">
+                                    <style>
+                                        select {
+                                            -webkit-appearance: none;
+                                            -moz-appearance: none;
+                                            appearance: none;
+                                            /* Remove default arrow */
+                                        }
+                                    </style>
+                                </div>
+                            
+                            <div class="success-message w-form-done" tabindex="-1" role="region"
+                            aria-label="Contact Form success">
+                                <div class="success-message-wrapper">
+                                    <h2>Thank you for your message, we’ll get back to you shortly.</h2>
+                                </div>
+                            </div>
+                            <div class="error-message w-form-fail" tabindex="-1" role="region"
+                            aria-label="Contact Form failure">
+                                <div>Oops! Something went wrong while submitting the form.</div>
                             </div>
                         </div>
+                        <div id="w-node-f3f772da-3f75-f2ad-daae-3a16ffa032b1-430663c1"
+                        class="contact-links-wrapper azure-form"><img src="/assets/images/main-image-compressed.jpeg"
+                            loading="eager"
+                            sizes="(max-width: 479px) 7.390625px, (max-width: 991px) 100vw, (max-width: 1439px) 3vw, 49.5px"
+                            srcset="/assets/images/main-image-compressed-p-1080.jpeg 1080w, /assets/images/main-image-compressed.jpeg 1440w"
+                            alt="" class="contact-image"></div>
                     </div>
+                    <div class="contact-grid">
+                    </div>
+                    @* <div class="container">
+                        <div class="row">
+                        <div class="col-lg-12">
+                        <div id="landingPageComponents">
+                        <div>
+                        <h4>
+                        Please share the following details to serve you better
+                        </h4>
+                        <div>
+                        <div>
+                        <div class="panel panel-default">
+                        <div class="row">
+                        <div class="col-sm-6">
+                        <div class="row">
+                        <div class="col-sm-12">
+                        @Html.DropDownListFor(m => m.Region, new
+                        SelectList(Enum.GetValues(typeof(TargetContosoRegionEnum))),
+                        "Select region", new { @class="form-dropdown white w-select" })
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                        <div class="col-sm-6">
+                        <div class="row">
+                        <div class="col-sm-12">
+                        <input asp-for="BusinessUnitContactEmail" type="email"
+                        placeholder="Business Unit Contact Email*"
+                        class="input-field white w-input" />
+                        </div>
+                        <div class="col-sm-12">
+                        <p class="azure-form-subtext">*The purchaser can be different than the end user</p>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-6">
+                        <div class="row">
+                        <div class="col-sm-12">
+                        <input asp-for="PurchaserEmail" type="email"
+                        placeholder="Contact Email"
+                        class="input-field white w-input" />
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div>
+                        <div>
+                        <h4>Details from Azure Marketplace</h4>
+                        </div>
+                        <div>
+                        <div>
+                        <div class="panel panel-default">
+
+                        <div class="row">
+                        <div class="col-sm-6">
+                        <label class="form-label">@Html.DisplayNameFor(model =>
+                        model.OfferId):</label>
+                        </div>
+                        <div class="col-sm-6">
+                        <label class="form-label">@Html.DisplayFor(model =>
+                        model.OfferId) </label>
+                        <input asp-for="OfferId" type="hidden" class="form-control" />
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-6">
+                        <label class="form-label">@Html.DisplayNameFor(model =>
+                        model.PlanId):</label>
+                        </div>
+                        <div class="col-sm-6">
+                        <label class="form-label">@Html.DisplayFor(model =>
+                        model.PlanId) </label>
+                        <input asp-for="PlanId" type="hidden" class="form-control" />
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-6">
+                        <label class="form-label">@Html.DisplayNameFor(model =>
+                        model.PurchaserTenantId):</label>
+                        </div>
+                        <div class="col-sm-6">
+                        <label class="form-label">@Html.DisplayFor(model =>
+                        model.PurchaserTenantId) </label>
+                        <input asp-for="PurchaserTenantId" type="hidden"
+                        class="form-control" />
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-6">
+                        <label class="form-label">@Html.DisplayNameFor(model =>
+                        model.BeneficiaryTenantId):</label>
+                        </div>
+                        <div class="col-sm-6">
+                        <label class="form-label">@Html.DisplayFor(model =>
+                        model.BeneficiaryTenantId) </label>
+                        <input asp-for="BeneficiaryTenantId" type="hidden"
+                        class="form-control" />
+                        </div>
+                        </div>
+
+                        @if (Model.SubscriptionStatus == SubscriptionStatusEnum.Subscribed)
+                        {
+                        <div class="row">
+                        <div class="col-sm-6">
+                        @Html.DisplayNameFor(model => model.AvailablePlans)
+                        </div>
+
+                        <div class="col-sm-6">
+                        @Html.DropDownListFor(m => m.Region, new
+                        SelectList(Model.AvailablePlans, "PlanId", "DisplayName"),
+                        "Choose a new plan")
+                        </div>
+                        </div>
+                        }
+
+                        <div class="row">
+                        <div class="col-sm-6">
+                        <label class="form-label">@Html.DisplayNameFor(model =>
+                        model.SubscriptionId):</label>
+                        </div>
+                        <div class="col-sm-6">
+                        <label class="form-label">@Html.DisplayFor(model =>
+                        model.SubscriptionId) </label>
+                        <input asp-for="SubscriptionId" type="hidden"
+                        class="form-control" />
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-6">
+                        @Html.DisplayNameFor(model => model.SubscriptionName)
+                        </div>
+                        <div class="col-sm-6">
+                        @Html.DisplayFor(model => model.SubscriptionName)
+                        <input asp-for="SubscriptionName" type="hidden"
+                        class="form-control" />
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div> *@
 
                     @* Just to carry over the subscription status, so we can determine if we are here for initial
                         provisioning or configuration later in the life of the subscription*@
                     <input asp-for="SubscriptionStatus" type="hidden" class="form-control" />
-
-                    <button type="submit" class="btn btn-primary btn-block m-2 mt-3 submit-btn">Submit</button>
                 </form>
             </div>
         </div>
         <div class="section footer wf-section">
-            <div class="container grid footer">
-                <a id="w-node-_2e8e277a-0c51-e798-6722-2f4e27841a2e-27841a2c" href="index.html" aria-current="page"
-                class="footer-brand w-inline-block w--current"><img src="/assets/images/logo-footer-1.svg"
-                    loading="lazy" alt="Spark Beyond Logo" class="footer-logo"></a>
-                <div id="w-node-_766e89bf-7a16-6943-c609-98354b213df8-27841a2c" class="footer-links">
-                    <div id="w-node-_2e8e277a-0c51-e798-6722-2f4e27841a4b-27841a2c" class="copyright-text">© 2021
-                        SparkBeyond</div>
-                    <a href="terms-of-service.html" class="footer-link no-margin">Terms of Use</a>
-                    <a href="privacy-policy.html" class="footer-link no-margin">Privacy Policy</a>
-                    <a href="cookie-policy.html" class="footer-link no-margin">Cookie Policy</a>
-                    <a href="disclaimers.html" class="footer-link no-margin">Disclaimers</a>
-                </div>
-                <div id="w-node-_2e8e277a-0c51-e798-6722-2f4e27841a30-27841a2c" class="social-links">
-                    <a href="https://www.linkedin.com/company/sparkbeyond" target="_blank"
-                    class="social-link footer w-inline-block"><img src="/assets/images/LinkedIn-Logo.svg" loading="lazy"
-                        alt="Linked In Logo" class="social-icon">
-                        <div class="social-icon-bg"></div>
-                    </a>
-                    <a href="https://twitter.com/sparkbeyond" target="_blank" class="social-link footer w-inline-block"><img
-                        src="/assets/images/Twitter-Logo.svg" loading="lazy" alt="Twitter Logo" class="social-icon">
-                        <div class="social-icon-bg"></div>
-                    </a>
-                    <a href="https://www.facebook.com/sparkbeyond/" target="_blank"
-                    class="social-link footer w-inline-block"><img src="/assets/images/Facebook-Logo.svg" loading="lazy"
-                        alt="Facebook Logo" class="social-icon">
-                        <div class="social-icon-bg"></div>
-                    </a>
-                    <a href="https://www.youtube.com/channel/UCctNa-70ktSNRsa_WPpNwnw" target="_blank"
-                    class="social-link footer w-inline-block"><img src="/assets/images/Youtube-Logo.svg" loading="lazy"
-                        alt="Youtube Logo" class="social-icon">
-                        <div class="social-icon-bg"></div>
-                    </a>
-                </div>
-            </div>
+      <div class="container grid footer">
+        <a id="w-node-_2e8e277a-0c51-e798-6722-2f4e27841a2e-27841a2c" href="index.html" class="footer-brand w-inline-block"><img src="/assets/images/logo-footer-1.svg" loading="lazy" alt="Spark Beyond Logo" class="footer-logo"></a>
+        <div id="w-node-_766e89bf-7a16-6943-c609-98354b213df8-27841a2c" class="footer-links">
+          <div id="w-node-_2e8e277a-0c51-e798-6722-2f4e27841a4b-27841a2c" class="copyright-text">© 2021 SparkBeyond</div>
+          <a href="terms-of-service.html" class="footer-link no-margin">Terms of Use</a>
+          <a href="privacy-policy.html" class="footer-link no-margin">Privacy Policy</a>
+          <a href="cookie-policy.html" class="footer-link no-margin">Cookie Policy</a>
+          <a href="disclaimers.html" class="footer-link no-margin">Disclaimers</a>
         </div>
+        <div id="w-node-_2e8e277a-0c51-e798-6722-2f4e27841a30-27841a2c" class="social-links">
+          <a href="https://www.linkedin.com/company/sparkbeyond" target="_blank" class="social-link footer w-inline-block"><img src="/assets/images/LinkedIn-Logo.svg" loading="lazy" alt="Linked In Logo" class="social-icon">
+            <div class="social-icon-bg"></div>
+          </a>
+          <a href="https://twitter.com/sparkbeyond" target="_blank" class="social-link footer w-inline-block"><img src="/assets/images/Twitter-Logo.svg" loading="lazy" alt="Twitter Logo" class="social-icon">
+            <div class="social-icon-bg"></div>
+          </a>
+          <a href="https://www.facebook.com/sparkbeyond/" target="_blank" class="social-link footer w-inline-block"><img src="/assets/images/Facebook-Logo.svg" loading="lazy" alt="Facebook Logo" class="social-icon">
+            <div class="social-icon-bg"></div>
+          </a>
+          <a href="https://www.youtube.com/channel/UCctNa-70ktSNRsa_WPpNwnw" target="_blank" class="social-link footer w-inline-block"><img src="/assets/images/Youtube-Logo.svg" loading="lazy" alt="Youtube Logo" class="social-icon">
+            <div class="social-icon-bg"></div>
+          </a>
+        </div>
+      </div>
+    </div>
+       
     </div>
     <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=60866fa44e871fb63043a756"
     type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
