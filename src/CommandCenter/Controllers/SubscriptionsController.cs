@@ -26,8 +26,8 @@ namespace CommandCenter.Controllers
     /// <summary>
     /// Subscriptions panel.
     /// </summary>
-    [Authorize("CommandCenterAdmin")]
-    [Authorize(AuthenticationSchemes = OpenIdConnectDefaults.AuthenticationScheme)]
+    //[Authorize("CommandCenterAdmin")]
+//    [Authorize(AuthenticationSchemes = OpenIdConnectDefaults.AuthenticationScheme)]
     public class SubscriptionsController : Controller
     {
         private readonly IMarketplaceSaaSClient marketplaceClient;

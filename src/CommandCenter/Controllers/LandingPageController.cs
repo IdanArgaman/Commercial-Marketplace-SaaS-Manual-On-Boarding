@@ -24,7 +24,8 @@ namespace CommandCenter.Controllers
     /// <summary>
     /// Landing page.
     /// </summary>
-    [Authorize(AuthenticationSchemes = OpenIdConnectDefaults.AuthenticationScheme)] // Specify the auth scheme to be used for logging on users. This is for supporting WebAPI auth
+    //[Authorize(AuthenticationSchemes = OpenIdConnectDefaults.AuthenticationScheme)] // Specify the auth scheme to be used for logging on users. This is for supporting WebAPI auth
+     [AllowAnonymous]
     public class LandingPageController : Controller
     {
         private const string SampleToken = "sampletoken";
@@ -45,24 +46,25 @@ namespace CommandCenter.Controllers
         /// <param name="graphServiceClient">Client for Graph API.</param>
         /// <param name="logger">Logger.</param>
         public LandingPageController(
-            IOptionsMonitor<CommandCenterOptions> commandCenterOptions,
-            IMarketplaceProcessor marketplaceProcessor,
-            IMarketplaceNotificationHandler notificationHandler,
-            IMarketplaceSaaSClient marketplaceClient,
-            GraphServiceClient graphServiceClient,
-            ILogger<LandingPageController> logger)
+            //IOptionsMonitor<CommandCenterOptions> commandCenterOptions,
+            // IMarketplaceProcessor marketplaceProcessor,
+            // IMarketplaceNotificationHandler notificationHandler,
+            // IMarketplaceSaaSClient marketplaceClient,
+            //GraphServiceClient graphServiceClient,
+            //ILogger<LandingPageController> logger
+        )
         {
-            if (commandCenterOptions == null)
-            {
-                throw new ArgumentNullException(nameof(commandCenterOptions));
-            }
+            // if (commandCenterOptions == null)
+            // {
+            //     throw new ArgumentNullException(nameof(commandCenterOptions));
+            // }
 
-            this.marketplaceProcessor = marketplaceProcessor;
-            this.notificationHandler = notificationHandler;
-            this.marketplaceClient = marketplaceClient;
-            this.graphServiceClient = graphServiceClient;
-            this.logger = logger;
-            this.options = commandCenterOptions.CurrentValue;
+            // this.marketplaceProcessor = marketplaceProcessor;
+            // this.notificationHandler = notificationHandler;
+            // this.marketplaceClient = marketplaceClient;
+            // this.graphServiceClient = graphServiceClient;
+            // this.logger = logger;
+            // this.options = commandCenterOptions.CurrentValue;
         }
 
         /// <summary>
@@ -74,6 +76,7 @@ namespace CommandCenter.Controllers
         [AuthorizeForScopes(Scopes = new string[] { "user.read" })]
         public async Task<ActionResult> Index(string token, CancellationToken cancellationToken)
         {
+            /*
             if (string.IsNullOrEmpty(token))
             {
                 this.ModelState.AddModelError(string.Empty, "Token URL parameter cannot be empty");
@@ -118,7 +121,9 @@ namespace CommandCenter.Controllers
             var graphApiUser = await this.graphServiceClient.Me.Request().GetAsync();
 
             var isSampleToken = string.Equals(token, SampleToken, StringComparison.InvariantCultureIgnoreCase);
+            */
 
+            var isSampleToken = true;
             var provisioningModel = new AzureSubscriptionProvisionModel
             {
                 // Landing page is the only place to capture the customer's contact details
@@ -126,31 +131,31 @@ namespace CommandCenter.Controllers
                 //  - the details received from the Graph API
                 //  - beneficiary information on the subscription details
                 // it is also possible that the Graph API
-                NameFromOpenIdConnect = (this.User.Identity as ClaimsIdentity)?.FindFirst("name")?.Value,
-                EmailFromClaims = this.User.Identity.GetUserEmail(),
-                EmailFromGraph = graphApiUser.Mail ?? string.Empty,
-                NameFromGraph = graphApiUser.DisplayName ?? string.Empty,
-                UserPrincipalName = graphApiUser.UserPrincipalName ?? string.Empty,
-                PurchaserEmail = graphApiUser.Mail ?? string.Empty,
+                NameFromOpenIdConnect = "Idan", // (this.User.Identity as ClaimsIdentity)?.FindFirst("name")?.Value,
+                EmailFromClaims = "Idan", //this.User.Identity.GetUserEmail(),
+                EmailFromGraph = "Idan", //graphApiUser.Mail ?? string.Empty,
+                NameFromGraph = "Idan", //graphApiUser.DisplayName ?? string.Empty,
+                UserPrincipalName = "Idan", //graphApiUser.UserPrincipalName ?? string.Empty,
+                PurchaserEmail = "Idan", //graphApiUser.Mail ?? string.Empty,
 
                 // Get the other potential contact information from the marketplace API
-                PurchaserUPN = isSampleToken ? "purchaser@purchaser.com" : subscriptionDetails?.Purchaser?.EmailId,
-                PurchaserTenantId = isSampleToken ? Guid.Empty : subscriptionDetails?.Purchaser?.TenantId ?? Guid.Empty,
-                BeneficiaryUPN = isSampleToken ? "customer@customer.com" : subscriptionDetails?.Beneficiary?.EmailId,
-                BeneficiaryTenantId = isSampleToken ? Guid.Empty : subscriptionDetails?.Beneficiary?.TenantId ?? Guid.Empty,
+                PurchaserUPN = "purchaser@purchaser.com", //isSampleToken ? "purchaser@purchaser.com" : subscriptionDetails?.Purchaser?.EmailId,
+                PurchaserTenantId = Guid.Empty, //isSampleToken ? Guid.Empty : subscriptionDetails?.Purchaser?.TenantId ?? Guid.Empty,
+                BeneficiaryUPN = "purchaser@purchaser.com", //isSampleToken ? "customer@customer.com" : subscriptionDetails?.Beneficiary?.EmailId,
+                BeneficiaryTenantId = Guid.Empty, //isSampleToken ? Guid.Empty : subscriptionDetails?.Beneficiary?.TenantId ?? Guid.Empty,
 
                 // Maybe the end users are a completely different set of contacts, start with one
-                BusinessUnitContactEmail = this.User.Identity.GetUserEmail(),
+                BusinessUnitContactEmail = "Idan", //this.User.Identity.GetUserEmail(),
 
-                PlanId = isSampleToken ? "purchaser@purchaser.com" : resolvedSubscription.PlanId,
-                SubscriptionId = isSampleToken ? Guid.Empty : resolvedSubscription.Id.Value,
-                OfferId = isSampleToken ? "sample offer" : resolvedSubscription.OfferId,
-                SubscriptionName = isSampleToken ? "sample subscription" : resolvedSubscription.SubscriptionName,
-                SubscriptionStatus = isSampleToken ? SubscriptionStatusEnum.PendingFulfillmentStart : subscriptionDetails?.SaasSubscriptionStatus ?? SubscriptionStatusEnum.NotStarted,
+                PlanId = "purchaser@purchaser.com", //isSampleToken ? "purchaser@purchaser.com" : resolvedSubscription.PlanId,
+                SubscriptionId =  Guid.Empty, //isSampleToken ? Guid.Empty : resolvedSubscription.Id.Value,
+                OfferId = "purchaser@purchaser.com", //isSampleToken ? "sample offer" : resolvedSubscription.OfferId,
+                SubscriptionName = "sample subscription", //isSampleToken ? "sample subscription" : resolvedSubscription.SubscriptionName,
+                SubscriptionStatus = SubscriptionStatusEnum.PendingFulfillmentStart, //isSampleToken ? SubscriptionStatusEnum.PendingFulfillmentStart : subscriptionDetails?.SaasSubscriptionStatus ?? SubscriptionStatusEnum.NotStarted,
 
                 Region = TargetContosoRegionEnum.NorthAmerica,
-                AvailablePlans = isSampleToken ? new System.Collections.Generic.List<Plan>() : availablePlans?.Value.Plans.ToList(),
-                PendingOperations = isSampleToken ? false : anyPendingOperations,
+                AvailablePlans = new System.Collections.Generic.List<Plan>(), //isSampleToken ? new System.Collections.Generic.List<Plan>() : availablePlans?.Value.Plans.ToList(),
+                PendingOperations = false, //isSampleToken ? false : anyPendingOperations,
             };
 
             return this.View(provisioningModel);

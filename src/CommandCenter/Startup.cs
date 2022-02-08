@@ -78,7 +78,7 @@ namespace CommandCenter
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            // app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -93,38 +93,46 @@ namespace CommandCenter
         /// <param name="services">Service collection.</param>
         public void ConfigureServices(IServiceCollection services)
         {
+           services.AddRazorPages();
+
+            services
+                .AddControllersWithViews()
+                .AddMicrosoftIdentityUI();
+
+            return;
+
             // Enable JwtBerar auth for the webhook to validate the incoming token with the WebHookTokenParameters section, since this call will be
             // related with our AAD App regisration details on the partner center.
-            services.AddMicrosoftIdentityWebApiAuthentication(this.configuration, "WebHookTokenParameters");
+           // services.AddMicrosoftIdentityWebApiAuthentication(this.configuration, "WebHookTokenParameters");
 
             // Now configure the custom token validation logic for WebHook
-            services.Configure<JwtBearerOptions>(
-                JwtBearerDefaults.AuthenticationScheme,
-                options =>
-                {
-                    // Need to override the ValidAudience, since the incoming token has the app ID as the aud claim.
-                    // Library expects it to be api://<appId> format.
-                    options.TokenValidationParameters.ValidAudience = this.configuration["WebHookTokenParameters:ClientId"];
-                    options.TokenValidationParameters.ValidIssuer = $"https://sts.windows.net/{this.configuration["WebHookTokenParameters:TenantId"]}/";
-                });
+            // services.Configure<JwtBearerOptions>(
+            //     JwtBearerDefaults.AuthenticationScheme,
+            //     options =>
+            //     {
+            //         // Need to override the ValidAudience, since the incoming token has the app ID as the aud claim.
+            //         // Library expects it to be api://<appId> format.
+            //         options.TokenValidationParameters.ValidAudience = this.configuration["WebHookTokenParameters:ClientId"];
+            //         options.TokenValidationParameters.ValidIssuer = $"https://sts.windows.net/{this.configuration["WebHookTokenParameters:TenantId"]}/";
+            //     });
 
             // Enable AAD sign on on the landing page and Graph API calling capabilities
-            services
-                .AddMicrosoftIdentityWebAppAuthentication(this.configuration, "AzureAd") // Sign on with AAD
-                .EnableTokenAcquisitionToCallDownstreamApi(new string[] { "user.read" }) // Call Graph API
-                    .AddMicrosoftGraph() // Use defaults with Graph V1
-                    .AddInMemoryTokenCaches(); // Add token caching
+            // services
+            //     .AddMicrosoftIdentityWebAppAuthentication(this.configuration, "AzureAd") // Sign on with AAD
+            //     .EnableTokenAcquisitionToCallDownstreamApi(new string[] { "user.read" }) // Call Graph API
+            //         .AddMicrosoftGraph() // Use defaults with Graph V1
+            //         .AddInMemoryTokenCaches(); // Add token caching
 
-            services.Configure<OpenIdConnectOptions>(options =>
-            {
-                options.Events.OnSignedOutCallbackRedirect = (context) =>
-                {
-                    context.Response.Redirect("/Subscriptions/Index");
-                    context.HandleResponse();
+            // services.Configure<OpenIdConnectOptions>(options =>
+            // {
+            //     options.Events.OnSignedOutCallbackRedirect = (context) =>
+            //     {
+            //         context.Response.Redirect("/Subscriptions/Index");
+            //         context.HandleResponse();
 
-                    return Task.CompletedTask;
-                };
-            });
+            //         return Task.CompletedTask;
+            //     };
+            // });
 
             services.Configure<CookieAuthenticationOptions>(CookieAuthenticationDefaults.AuthenticationScheme, options =>
                 {
@@ -135,55 +143,51 @@ namespace CommandCenter
 
             services.Configure<CommandCenterOptions>(this.configuration.GetSection("CommandCenter"));
 
-            var marketplaceClientOptions = new MarketplaceClientOptions();
-            this.configuration.GetSection(MarketplaceClientOptions.MarketplaceClient).Bind(marketplaceClientOptions);
+            // var marketplaceClientOptions = new MarketplaceClientOptions();
+            // this.configuration.GetSection(MarketplaceClientOptions.MarketplaceClient).Bind(marketplaceClientOptions);
 
-            var creds = new ClientSecretCredential(marketplaceClientOptions.TenantId.ToString(), marketplaceClientOptions.ClientId.ToString(), marketplaceClientOptions.ClientSecret);
+            // var creds = new ClientSecretCredential(marketplaceClientOptions.TenantId.ToString(), marketplaceClientOptions.ClientId.ToString(), marketplaceClientOptions.ClientSecret);
 
-            services.TryAddScoped<IMarketplaceSaaSClient>(sp =>
-            {
-                return new MarketplaceSaaSClient(creds);
-            });
+            // services.TryAddScoped<IMarketplaceSaaSClient>(sp =>
+            // {
+            //     return new MarketplaceSaaSClient(creds);
+            // });
 
-            services.TryAddScoped<IMarketplaceMeteringClient>(sp =>
-            {
-                return new MarketplaceMeteringClient(creds);
-            });
+            // services.TryAddScoped<IMarketplaceMeteringClient>(sp =>
+            // {
+            //     return new MarketplaceMeteringClient(creds);
+            // });
 
-            services.TryAddScoped<IOperationsStore>(sp =>
-                new AzureTableOperationsStore(this.configuration["CommandCenter:OperationsStoreConnectionString"]));
+            // services.TryAddScoped<IOperationsStore>(sp =>
+            //     new AzureTableOperationsStore(this.configuration["CommandCenter:OperationsStoreConnectionString"]));
 
-            services.TryAddScoped<IDimensionUsageStore>(sp =>
-                new AzureTableDimensionUsageStore(this.configuration["CommandCenter:OperationsStoreConnectionString"]));
+            // services.TryAddScoped<IDimensionUsageStore>(sp =>
+            //     new AzureTableDimensionUsageStore(this.configuration["CommandCenter:OperationsStoreConnectionString"]));
 
             // Hack to save the host name and port during the handling the request. Please see the WebhookController and ContosoWebhookHandler implementations
-            services.AddSingleton<ContosoWebhookHandlerOptions>();
+            // services.AddSingleton<ContosoWebhookHandlerOptions>();
 
-            services.TryAddScoped<IWebhookHandler, ContosoWebhookHandler>();
-            services.TryAddScoped<IMarketplaceProcessor, MarketplaceProcessor>();
+            // services.TryAddScoped<IWebhookHandler, ContosoWebhookHandler>();
+            // services.TryAddScoped<IMarketplaceProcessor, MarketplaceProcessor>();
 
-            services.TryAddScoped<IMarketplaceNotificationHandler, AzureQueueNotificationHandler>();
+            // services.TryAddScoped<IMarketplaceNotificationHandler, AzureQueueNotificationHandler>();
 
-            services.AddAuthorization(
-                options => options.AddPolicy(
-                    "CommandCenterAdmin",
-                    policy =>
-                    {
-                        policy.AuthenticationSchemes.Add(OpenIdConnectDefaults.AuthenticationScheme);
-                        policy.RequireAuthenticatedUser();
-                        policy.Requirements.Add(
-                        new CommandCenterAdminRequirement(
-                            this.configuration.GetSection("CommandCenter").Get<CommandCenterOptions>()
-                                .CommandCenterAdmin));
-                    }));
+            // services.AddAuthorization(
+            //     options => options.AddPolicy(
+            //         "CommandCenterAdmin",
+            //         policy =>
+            //         {
+            //             policy.AuthenticationSchemes.Add(OpenIdConnectDefaults.AuthenticationScheme);
+            //             policy.RequireAuthenticatedUser();
+            //             policy.Requirements.Add(
+            //             new CommandCenterAdminRequirement(
+            //                 this.configuration.GetSection("CommandCenter").Get<CommandCenterOptions>()
+            //                     .CommandCenterAdmin));
+            //         }));
 
-            services.AddSingleton<IAuthorizationHandler, CommandCenterAdminHandler>();
+            //services.AddSingleton<IAuthorizationHandler, CommandCenterAdminHandler>();
 
-            services.AddRazorPages();
-
-            services
-                .AddControllersWithViews()
-                .AddMicrosoftIdentityUI();
+            
         }
     }
 }

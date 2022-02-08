@@ -15,7 +15,7 @@ namespace CommandCenter.Controllers
     /// <summary>
     /// Manage mail links.
     /// </summary>
-    [Authorize("CommandCenterAdmin")]
+    //[Authorize("CommandCenterAdmin")]
     public class MailLinkController : Controller
     {
         private readonly IMarketplaceProcessor marketplaceProcessor;
